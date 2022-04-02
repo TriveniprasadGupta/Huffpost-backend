@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 
 
  const newToken=(user)=>{
-    return jwt.sign({user}, "flipkart");
+    return jwt.sign({user}, "huffpost");
  }
 
 const register =async (req, res) => {
