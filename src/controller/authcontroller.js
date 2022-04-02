@@ -15,13 +15,16 @@ const register =async (req, res) => {
         let user= await Huffpostuser.findOne({email:req.body.email}).lean().exec();
          console.log(user)
 
-        
-       if(user  ==! null) return res.status(400).send({ message: "Please try another email" });
+       if(user  !== null){
+
+          return res.send({ message: "Please try another email" });
+
+       }
+      
       
        
         user =await Huffpostuser.create(req.body);
-       
-        let x=JSON.parse(JSON.stringify(user))
+   
         const token = newToken(user);
        // console.log(token);
         res.send({user,token});
@@ -35,11 +38,11 @@ const register =async (req, res) => {
 const login =  async (req, res) => {
     try{
         let  user = await Huffpostuser.findOne({email:req.body.email});
-        if(!user) return res.send("Password or email is invalid")
+        if(!user) return res.send({error:"email is invalid"})
      
         const match= user.checkpassword(req.body.password);
 
-         if(!match) return res.send("Password or email is invalid");
+         if(!match) return res.send({error:"Password is invalid"});
          let x=JSON.parse(JSON.stringify(user))
          const token = newToken(user)
 
