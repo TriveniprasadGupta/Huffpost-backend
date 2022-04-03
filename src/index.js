@@ -3,6 +3,8 @@ const app = express()
 const connect = require('./config/db')
 const cors=require("cors")
 
+const datacontroller=require('./controller/Data.controller')
+
 const port=process.env.PORT || 8000
 let {register,login} = require("./controller/authcontroller");
 
@@ -19,6 +21,8 @@ const corsOptions ={
 app.use(cors(corsOptions))
 
 app.use(express.json())
+
+app.use("",datacontroller)
 
 app.use("/googleuser",googlecontroller)
 
