@@ -1,26 +1,19 @@
-const express = require('express')
+const express = require("express");
 
-const router = express.Router()
+const router = express.Router();
 
-const User=require("../models/google.user.model")
+const User = require("../models/google.user.model");
 
-router.post("",async(req,res)=>{
+router.post("", async (req, res) => {
+  try {
+    const user = await User.create(req.body);
 
+    console.log("vikas");
 
-    try{
-        const user= await User.create(req.body)
+    res.send(user);
+  } catch (er) {
+    console.log(er.message);
+  }
+});
 
-        console.log("vikas")
-
-        res.send(user)
-
-    }
-    catch(er){
-        console.log(er.message)
-    }
-
-    
-
-})
-
-module.exports =router
+module.exports = router;
